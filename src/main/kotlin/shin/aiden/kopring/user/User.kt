@@ -12,8 +12,8 @@ class User(
     var id: Long? = null,
     var email: String,
     @Column(name = "password")
-    var passwords: String,
-    var name: String,
+    var passwords: String?,
+    var name: String?,
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
@@ -25,7 +25,7 @@ class User(
         return arrayListOf(SimpleGrantedAuthority(roles.name))
     }
 
-    override fun getPassword(): String {
+    override fun getPassword(): String? {
         return passwords
     }
 

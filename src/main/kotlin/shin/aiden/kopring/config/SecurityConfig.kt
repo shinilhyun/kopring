@@ -36,12 +36,13 @@ class SecurityConfig(
             .csrf().disable()
             .httpBasic().disable()
             .authorizeRequests()// 요청에 대한 사용권한 체크
-            .antMatchers("/login, /sign").permitAll()
-            .antMatchers("/**").authenticated()
+            .antMatchers("/login").permitAll()
+            .antMatchers("/sign").permitAll()
+            .anyRequest().authenticated()
             .and()
             .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
-            .addFilterBefore(ExceptionHandlerFilter(), JwtAuthenticationFilter::class.java)
             .exceptionHandling()
+            .authenticationEntryPoint(AuthEntryPoint())
     }
 
 }

@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 import shin.aiden.kopring.exception.UnAuthorizedException
@@ -60,13 +61,9 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
 
     // JWT 토큰에서 인증 정보 조회
     fun getAuthentication(token: String): Authentication? {
-        val userDetails = userDetailsService.loadUserByUsername(getUsername(token))
+        val decode = JWT.decode(token)
+        val userDetails = userDetailsService.loadUserByUsername(decode.getClaim("email").asString())
         return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
-    }
-
-    // 토큰에서 회원 정보 추출
-    fun getUsername(token: String?): String? {
-        return JWT.decode(token).claims["email"].toString()
     }
 
     // Request의 Header에서 token 값을 가져옵니다. "Authorization" : "TOKEN값'
@@ -78,7 +75,7 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
     fun validateToken(jwtToken: String?): Boolean {
         val verification = JWT.require(Algorithm.HMAC256(accessSecret)).acceptExpiresAt(Date().time).build()
         kotlin.runCatching { verification.verify(jwtToken) }
-            .onFailure { throw UnAuthorizedException() }
+            .onFailure { return false }
         return true
     }
 
@@ -86,7 +83,7 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
         val verification = JWT.require(Algorithm.HMAC256(refreshSecret)).acceptExpiresAt(Date().time).build()
 
         kotlin.runCatching { verification.verify(jwtToken) }
-            .onFailure { throw UnAuthorizedException() }
+            .onFailure { return false }
         return true
     }
 }

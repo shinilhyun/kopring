@@ -1,5 +1,6 @@
 package shin.aiden.kopring.config
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
@@ -26,6 +27,8 @@ class JwtAuthenticationFilter(private val jwtTokenProvider: JwtTokenProvider) : 
             val authentication: Authentication? = jwtTokenProvider.getAuthentication(token!!)
             // SecurityContext 에 Authentication 객체를 저장합니다.
             SecurityContextHolder.getContext().setAuthentication(authentication)
+        } else {
+            SecurityContextHolder.getContext().setAuthentication(null)
         }
         filterChain.doFilter(request, response)
     }
