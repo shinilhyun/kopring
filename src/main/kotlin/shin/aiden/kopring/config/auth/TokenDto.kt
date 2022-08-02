@@ -1,4 +1,4 @@
-package shin.aiden.kopring.user
+package shin.aiden.kopring.config.auth
 
 class TokenDto {
 }

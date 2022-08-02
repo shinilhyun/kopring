@@ -1,8 +1,9 @@
-package shin.aiden.kopring.user
+package shin.aiden.kopring.config.auth
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import shin.aiden.kopring.user.UserRoles
 
 class UserPrincipal(
     var id: Long? = null,

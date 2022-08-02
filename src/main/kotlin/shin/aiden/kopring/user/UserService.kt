@@ -3,7 +3,8 @@ package shin.aiden.kopring.user
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import shin.aiden.kopring.config.JwtTokenProvider
+import shin.aiden.kopring.config.auth.JwtTokenProvider
+import shin.aiden.kopring.config.auth.TokenResponse
 
 @Service
 @Transactional

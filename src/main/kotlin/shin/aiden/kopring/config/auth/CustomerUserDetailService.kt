@@ -1,8 +1,10 @@
-package shin.aiden.kopring.user
+package shin.aiden.kopring.config.auth
 
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import shin.aiden.kopring.user.UserRepository
+import shin.aiden.kopring.user.findByEmailThrow
 
 @Service
 class CustomerUserDetailService(

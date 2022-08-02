@@ -1,4 +1,4 @@
-package shin.aiden.kopring.config
+package shin.aiden.kopring.config.auth
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
