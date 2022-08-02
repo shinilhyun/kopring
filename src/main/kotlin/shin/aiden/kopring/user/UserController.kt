@@ -16,7 +16,7 @@ class UserController(
     @PostMapping("/sign")
     fun saveUser(@RequestBody userCreateRequest: UserCreateRequest): ResponseEntity<String> {
         userService.saveUser(userCreateRequest)
-        return ResponseEntity.ok("succes")
+        return ResponseEntity.ok("success")
     }
 
     @PostMapping("/login")
@@ -25,7 +25,7 @@ class UserController(
     }
 
     @GetMapping("/test")
-    fun test(@AuthenticationPrincipal user: User) : String {
+    fun test(@AuthenticationPrincipal user: UserPrincipal) : String {
         return user.email
     }
 }

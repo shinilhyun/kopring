@@ -15,8 +15,8 @@ class UserService(
     fun UserCreateRequest.create() = User(
         email = this.email,
         name = this.name,
-        passwords = bCryptPasswordEncoder.encode(this.rawPassword),
-        roles = UserRoles.ROLE_USER,
+        password = bCryptPasswordEncoder.encode(this.rawPassword),
+        role = UserRoles.ROLE_USER,
     )
 
     fun saveUser(userCreateRequest: UserCreateRequest) {
@@ -32,8 +32,8 @@ class UserService(
         val user = userRepository.findByEmailThrow(email)
         val matches = bCryptPasswordEncoder.matches(rawPassword, user.password)
         if(!matches) throw IllegalArgumentException("패스워드가 일치하지 않습니다")
-        val accessToken = tokenProvider.createAccessToken(user.id.toString(), user.email, arrayListOf(user.roles.name))
-        val refreshToken = tokenProvider.createRefreshToken(user.id.toString(), arrayListOf(user.roles.name))
+        val accessToken = tokenProvider.createAccessToken(user.id.toString(), user.email, arrayListOf(user.role.name))
+        val refreshToken = tokenProvider.createRefreshToken(user.id.toString(), arrayListOf(user.role.name))
         return TokenResponse(accessToken = accessToken, refreshToken = refreshToken)
     }
 }

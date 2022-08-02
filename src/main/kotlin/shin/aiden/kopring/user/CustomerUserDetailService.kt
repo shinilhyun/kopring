@@ -11,7 +11,14 @@ class CustomerUserDetailService(
 
     override fun loadUserByUsername(username: String?): UserDetails {
         checkNotNull(username)
-        return userRepository.findByEmailThrow(username)
+        val user = userRepository.findByEmailThrow(username)
+        return UserPrincipal(
+            id = user.id,
+            name = user.name,
+            role = user.role,
+            passwords = user.password,
+            email = user.email,
+        )
     }
 
 }

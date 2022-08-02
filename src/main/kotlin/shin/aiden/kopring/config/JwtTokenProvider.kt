@@ -21,7 +21,7 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
 
     // 토큰 유효시간 30분
     private val tokenValidTime = 30 * 60 * 1000L
-    private val refreshValidTime = 15 * 60 * 60 * 1000L
+    private val refreshValidTime = 15 * 24 * 60 * 60 * 1000L
 
 
 
@@ -73,14 +73,14 @@ class JwtTokenProvider(private val userDetailsService: UserDetailsService) {
 
     // 토큰의 유효성 + 만료일자 확인
     fun validateToken(jwtToken: String?): Boolean {
-        val verification = JWT.require(Algorithm.HMAC256(accessSecret)).acceptExpiresAt(Date().time).build()
+        val verification = JWT.require(Algorithm.HMAC256(accessSecret)).build()
         kotlin.runCatching { verification.verify(jwtToken) }
             .onFailure { return false }
         return true
     }
 
     fun validateRefreshToken(jwtToken: String?): Boolean {
-        val verification = JWT.require(Algorithm.HMAC256(refreshSecret)).acceptExpiresAt(Date().time).build()
+        val verification = JWT.require(Algorithm.HMAC256(refreshSecret)).build()
 
         kotlin.runCatching { verification.verify(jwtToken) }
             .onFailure { return false }
