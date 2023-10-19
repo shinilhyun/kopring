@@ -20,6 +20,7 @@ class CustomerUserDetailService(
             role = user.role,
             passwords = user.password,
             email = user.email,
+            provider = user.provider,
         )
     }
 

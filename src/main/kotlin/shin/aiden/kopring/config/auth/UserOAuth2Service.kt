@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import shin.aiden.kopring.user.Provider
 import shin.aiden.kopring.user.User
 import shin.aiden.kopring.user.UserRepository
 import shin.aiden.kopring.user.UserRoles
@@ -28,7 +29,8 @@ class UserOAuth2Service(
             email = kakaoUser.email,
             name = kakaoUser.nickName,
             password = null,
-            role = UserRoles.ROLE_USER
+            role = UserRoles.ROLE_USER,
+            provider = Provider.KAKAO
         ))
 
         return DefaultOAuth2User(singleton(SimpleGrantedAuthority(UserRoles.ROLE_USER.name)), attributes, "id");

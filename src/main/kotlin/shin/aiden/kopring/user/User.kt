@@ -19,4 +19,8 @@ class User(
     @Enumerated(EnumType.STRING)
     var role: UserRoles,
 
+    @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
+    var provider: Provider
+
 )

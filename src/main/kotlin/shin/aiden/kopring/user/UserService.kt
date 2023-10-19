@@ -18,6 +18,7 @@ class UserService(
         name = this.name,
         password = bCryptPasswordEncoder.encode(this.rawPassword),
         role = UserRoles.ROLE_USER,
+        provider = Provider.INVIGO,
     )
 
     fun saveUser(userCreateRequest: UserCreateRequest) {

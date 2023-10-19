@@ -3,6 +3,7 @@ package shin.aiden.kopring.config.auth
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import shin.aiden.kopring.user.Provider
 import shin.aiden.kopring.user.UserRoles
 
 class UserPrincipal(
@@ -11,6 +12,7 @@ class UserPrincipal(
     var passwords: String?,
     var name: String?,
     var role: UserRoles,
+    var provider: Provider,
 ) : UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {

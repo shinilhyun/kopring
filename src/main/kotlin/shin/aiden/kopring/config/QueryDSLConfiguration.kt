@@ -1,4 +1,4 @@
-package shin.aiden.kopring.config.auth
+package shin.aiden.kopring.config
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.context.annotation.Bean
