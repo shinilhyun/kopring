@@ -1,6 +1,5 @@
 package shin.aiden.kopring.user
 
-import org.springframework.validation.annotation.Validated
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
@@ -16,7 +15,7 @@ data class UserCreateRequest(
     var rawPassword: String,
 )
 
-data class loginRequest(
+data class LoginRequest(
     @Email
     val email: String,
     @NotBlank

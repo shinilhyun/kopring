@@ -21,7 +21,7 @@ class UserController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: loginRequest): TokenResponse {
+    fun login(@RequestBody loginRequest: LoginRequest): TokenResponse {
         return userService.login(loginRequest.email, loginRequest.rawPassword)
     }
 
